@@ -2,6 +2,8 @@ import webbrowser
 import requests
 import bs4
 from selenium import webdriver
+import matplotlib.pyplot as plt
+
 path = "C:/Users/q8_a7/Desktop/fpl/driver_file/geckodriver.exe"
 driver = webdriver.Firefox(executable_path= r'C:/Users/q8_a7/Desktop/fpl/driver_file/geckodriver.exe')
 
@@ -27,6 +29,19 @@ for x in range(38):
 		i += 1
 	except IndexError:
 		break
+
+lines =[oarank, gwrank, gwpoints, oapoints, tv]
+with open('fplrecord.txt', 'w') as f:
+    f.write(f"oarank:\n{oarank} \n")
+    f.write(f"gwrank:\n{gwrank} \n")
+    f.write(f"gwpoints:\n{gwpoints} \n")
+    f.write(f"oapoints:\n{oapoints} \n")
+    f.write(f"tv:\n{tv} \n")
+
+
+
+
+
 
 
 
