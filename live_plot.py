@@ -37,9 +37,9 @@ def animate(i):
 	count += 1
 	plt.plot(x,y, color = 'orange')
 	plt.yscale('log')
-	ticks= (500000, 250000, 100000, 50000, 25000, 10000, 5000)
+	ticks= (1000000, 300000, 100000, 30000, 10000, 3000, 1000)
 	plt.yticks(ticks)
-	ax.set_yticklabels(["500k", "250k", "100k", "50k", '25k', '10k', '5k'])
+	ax.set_yticklabels(["1M", "300k", "100k", "30k", "10k", '3k', '1k'])
 
 	plt.locator_params(axis="x", nbins=count)
 
