@@ -29,7 +29,7 @@ for x in range(38):
 		i += 1
 	except IndexError:
 		break
-
+print(oarank)
 lines =[oarank, gwrank, gwpoints, oapoints, tv]
 with open('fplrecord.txt', 'w') as f:
     f.write(f"oarank:\n{oarank} \n")
