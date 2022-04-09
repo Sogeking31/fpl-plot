@@ -1,5 +1,6 @@
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
+import json
 
 file_name = 'fplrecord.txt'
 data = []
@@ -9,6 +10,11 @@ with open (file_name, 'r') as f:
 		stripped_line = line.strip()
 		line_list = stripped_line.split()
 		data.append(line_list)
+
+file_name2 = 'chipsrecord.txt'
+with open(file_name2, 'r') as f2:
+	data2 = f2.read()
+chips = json.loads(data2)
 
 oarank = data[1]
 gwrank = data[3]
@@ -51,6 +57,17 @@ def animate(i):
 		color = "#A0A0A0"
 	
 	plt.plot([x[count-1], x[count]], [y[count-1],y[count]], color = color)
+
+	for key in chips:
+		if f'GW{x[-1]}' == key:
+			if chips[key] == 'Wildcard':
+				plt.text(x[-1], y[-1], 'WC')
+			elif chips[key] == 'FreeHit':
+				plt.text(x[-1], y[-1], 'FH')
+			if chips[key] == 'BenchBoost':
+				plt.text(x[-1], y[-1], 'BB')
+			if chips[key] == 'TripleCaptain':
+				plt.text(x[-1], y[-1], 'TC')
 
 	plt.yscale('log')
 	ticks= (1000000, 300000, 100000, 30000, 10000, 3000, 1000)
