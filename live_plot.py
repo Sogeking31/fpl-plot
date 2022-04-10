@@ -22,18 +22,22 @@ with open('team_name.txt', 'r') as f3:
 	team_name =team_name[:-2]
 	team_name.strip()
 
-oarank = data[1]
-gwrank = data[3]
-gwpoints = data[5]
-oapoints = data[7]
-tv = data[9]
-
-oarank = [x.replace(',','') for x in oarank]
-oarank = [x.replace('[','') for x in oarank]
-oarank = [x.replace(']','') for x in oarank]
-oarank = [x.replace("'","") for x in oarank]
-
-oarank = [int(x) for x in oarank]
+team_data ={
+	'oarank' : data[1],
+	'gwrank' : data[3],
+	'gwpoints' : data[5],
+	'oapoints' : data[7],
+	'tv' : data[9],
+}
+for key in team_data:
+	team_data[key] = [x.replace(',','') for x in team_data[key]]
+	team_data[key] = [x.replace('[','') for x in team_data[key]]
+	team_data[key] = [x.replace(']','') for x in team_data[key]]
+	team_data[key] = [x.replace("'","") for x in team_data[key]]
+	try:
+		team_data[key] = [int(x) for x in team_data[key]]
+	except ValueError:
+		team_data[key] = [float(x) for x in team_data[key]]
 
 plt.style.use('seaborn-darkgrid')
 fig, ax = plt.subplots(1,1,figsize=(12,6))
@@ -41,13 +45,13 @@ fig.patch.set_facecolor('White')
 plt.margins(0)
 plt.subplots_adjust(left=0.075, right=0.95, top=0.925, bottom=0.1)
 x=[0]
-y=[oarank[0]]
+y=[team_data['oarank'][0]]
 count =1
 
 def animate(i):
 	global count
 	x.append(count)
-	y.append(oarank[count-1])
+	y.append(team_data['oarank'][count-1])
 	s= line_slope(y[count-1], y[count])
 
 	if -0.15 >= s > -0.3:
