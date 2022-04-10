@@ -44,6 +44,8 @@ fig, ax = plt.subplots(1,1,figsize=(12,6))
 fig.patch.set_facecolor('White')
 plt.margins(0)
 plt.subplots_adjust(left=0.075, right=0.95, top=0.925, bottom=0.1)
+
+textboxes=[]
 x=[0]
 y=[team_data['oarank'][0]]
 count =1
@@ -51,7 +53,7 @@ count =1
 def animate(i):
 	global count
 	x.append(count)
-	y.append(team_data['oarank'][count-1])
+	y.append(team_data['oarank'][count])
 	s= line_slope(y[count-1], y[count])
 
 	if -0.15 >= s > -0.3:
@@ -69,7 +71,7 @@ def animate(i):
 	else:
 		color = "#A0A0A0"
 	
-	plt.plot([x[count], x[count]+1], [y[count-1],y[count]], color = color)
+	plt.plot([x[count], x[count]+1], [y[-2],y[-1]], color = color)
 
 	for key in chips:
 		if f'GW{x[-1]}' == key:
@@ -87,7 +89,19 @@ def animate(i):
 	plt.yticks(ticks)
 	ax.set_yticklabels(["1M", "300k", "100k", "30k", "10k", '3k', '1k'])
 	plt.locator_params(axis="x", nbins=count)
-	count += 1
+
+	try:
+		textboxes[-1].remove()
+	except IndexError:
+		pass
+		
+	text = f"GW# {x[count]+1}\nOR: {y[-1]}\nGW rank:{team_data['gwrank'][count]}\nTeam Value:{team_data['tv'][count]}"
+	props = dict(boxstyle='round', facecolor='Green', alpha=0.4)
+	textbox = ax.text(0.05, 0.95, text, transform=ax.transAxes,
+	 fontsize=12, verticalalignment='top', bbox=props)
+	textboxes.append(textbox)
+
+	count += 1	
 
 def line_slope(y1, y2):
     s = ((y1 - y2)/y1)
@@ -96,7 +110,7 @@ def line_slope(y1, y2):
 ax.set_title(f"{team_name} 2021/2022 Season Rank Progression",
  fontsize= 24, color = ('Purple'))
 ax.tick_params(axis='both', labelsize= 12)
-ax.set_xlabel("Gameweek ", fontsize= 18)
+ax.set_xlabel("Gameweek", fontsize= 18)
 ax.set_ylabel("Overall Rank", fontsize = 18)
 
 ani = animation.FuncAnimation(plt.gcf(), animate, interval=1000)
