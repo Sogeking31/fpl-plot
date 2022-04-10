@@ -16,6 +16,12 @@ with open(file_name2, 'r') as f2:
 	data2 = f2.read()
 chips = json.loads(data2)
 
+with open('team_name.txt', 'r') as f3:
+	team_name = f3.read()
+	team_name =team_name[2:]
+	team_name =team_name[:-2]
+	team_name.strip()
+
 oarank = data[1]
 gwrank = data[3]
 gwpoints = data[5]
@@ -31,6 +37,9 @@ oarank = [int(x) for x in oarank]
 
 plt.style.use('seaborn-darkgrid')
 fig, ax = plt.subplots(1,1,figsize=(12,6))
+fig.patch.set_facecolor('White')
+plt.margins(0)
+plt.subplots_adjust(left=0.075, right=0.95, top=0.925, bottom=0.1)
 x=[0]
 y=[oarank[0]]
 count =1
@@ -56,18 +65,18 @@ def animate(i):
 	else:
 		color = "#A0A0A0"
 	
-	plt.plot([x[count-1], x[count]], [y[count-1],y[count]], color = color)
+	plt.plot([x[count], x[count]+1], [y[count-1],y[count]], color = color)
 
 	for key in chips:
 		if f'GW{x[-1]}' == key:
 			if chips[key] == 'Wildcard':
-				plt.text(x[-1], y[-1], 'WC')
+				plt.text(x[-1], y[-1], 'WC', color = ('Purple'))
 			elif chips[key] == 'FreeHit':
-				plt.text(x[-1], y[-1], 'FH')
-			if chips[key] == 'BenchBoost':
-				plt.text(x[-1], y[-1], 'BB')
-			if chips[key] == 'TripleCaptain':
-				plt.text(x[-1], y[-1], 'TC')
+				plt.text(x[-1], y[-1], 'FH', color = ('Purple'))
+			elif chips[key] == 'BenchBoost':
+				plt.text(x[-1], y[-1], 'BB', color = ('Purple'))
+			elif chips[key] == 'TripleCaptain':
+				plt.text(x[-1], y[-1], 'TC', color = ('Purple'))
 
 	plt.yscale('log')
 	ticks= (1000000, 300000, 100000, 30000, 10000, 3000, 1000)
@@ -80,12 +89,13 @@ def line_slope(y1, y2):
     s = ((y1 - y2)/y1)
     return s
 
-ax.set_title("OR 2021/2022 Season", fontsize= 24)
-ax.tick_params(axis='both', labelsize= 14)
-ax.set_xlabel("GameWeek ", fontsize= 14)
-ax.set_ylabel("Overall Rank", fontsize = 14)
+ax.set_title(f"{team_name} 2021/2022 Season Rank Progression",
+ fontsize= 24, color = ('Purple'))
+ax.tick_params(axis='both', labelsize= 12)
+ax.set_xlabel("Gameweek ", fontsize= 18)
+ax.set_ylabel("Overall Rank", fontsize = 18)
 
 ani = animation.FuncAnimation(plt.gcf(), animate, interval=1000)
 plt.gca().invert_yaxis()
-ax.yaxis.tick_right()
+ax.tick_params(labeltop=False, labelright=True)
 plt.show()

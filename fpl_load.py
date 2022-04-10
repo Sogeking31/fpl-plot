@@ -63,11 +63,12 @@ for x in range(6):
 	except IndexError:
 		break
 
-g = 0
-for gw in chips_gw:
-	used_chips[gw] = chips[g]
-	g += 1
-	
+elems_nm = soup.select(f'.eQebeb > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > h4:nth-child(1)')
+html_nm = f"""{elems_nm}"""
+team_name = remove_tags(html_nm)
+with open('team_name.txt', 'w') as f:
+	f.write(team_name)
+
 lines =[oarank, gwrank, gwpoints, oapoints, tv]
 with open('fplrecord.txt', 'w') as f:
     f.write(f"oarank:\n{oarank} \n")
@@ -76,6 +77,10 @@ with open('fplrecord.txt', 'w') as f:
     f.write(f"oapoints:\n{oapoints} \n")
     f.write(f"tv:\n{tv} \n")
 
+g = 0
+for gw in chips_gw:
+	used_chips[gw] = chips[g]
+	g += 1
 with open('chipsrecord.txt', 'w') as f:
 	f.write(json.dumps(used_chips))
 
