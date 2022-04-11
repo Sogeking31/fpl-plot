@@ -9,7 +9,7 @@ import json
 path = "C:/Users/q8_a7/Desktop/fpl/driver_file/geckodriver.exe"
 driver = webdriver.Firefox(executable_path= r'C:/Users/q8_a7/Desktop/fpl/driver_file/geckodriver.exe')
 
-team_id = '1014'
+team_id = '3371560'
 headers={'user-agent': 'Mozilla/5.0'}
 driver.get(f"https://fantasy.premierleague.com/entry/{team_id}/history")
 soup = bs4.BeautifulSoup(driver.page_source, "html.parser")

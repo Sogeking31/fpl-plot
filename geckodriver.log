@@ -1054,3 +1054,22 @@ DevTools listening on ws://localhost:61360/devtools/browser/52ecd788-0e6e-4277-9
 JavaScript warning: https://js.datadome.co/tags.js, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
 1649599946136	Marionette	INFO	Stopped listening on port 61365
 console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1649687387134	geckodriver	INFO	Listening on 127.0.0.1:54562
+1649687390202	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "54563" "-no-remote" "-profile" "C:\\Users\\q8_a7\\AppData\\Local\\Temp\\rust_mozprofilemJq1FQ"
+1649687390968	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\q8_a7\\AppData\\Local\\Temp\\rust_mozprofilemJq1FQ\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:54563/devtools/browser/f33f4257-3fbe-4303-844a-d6c08e22ec02
+1649687394280	Marionette	INFO	Listening on port 54568
+1649687394427	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://js.datadome.co/tags.js, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1649687839377	Marionette	INFO	Stopped listening on port 54568
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+e" "--remote-debugging-port" "54645" "-no-remote" "-profile" "C:\\Users\\q8_a7\\AppData\\Local\\Temp\\rust_mozprofilexJ855f"
+1649687429837	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\q8_a7\\AppData\\Local\\Temp\\rust_mozprofilexJ855f\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:54645/devtools/browser/c5dd500e-ed46-4de2-9b4f-ce8f970d85ac
+1649687432806	Marionette	INFO	Listening on port 54650
+1649687432944	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://js.datadome.co/tags.js, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1649688386645	Marionette	INFO	Stopped listening on port 54650
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.

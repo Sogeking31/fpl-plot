@@ -46,8 +46,10 @@ plt.margins(0)
 plt.subplots_adjust(left=0.075, right=0.95, top=0.925, bottom=0.1)
 
 textboxes=[]
+textboxes2=[]
 x=[1]
 y=[team_data['oarank'][0]]
+gw_list=[]
 count =1
 
 def animate(i):
@@ -85,9 +87,9 @@ def animate(i):
 				plt.text(x[-1], y[-1], 'TC', color = ('Purple'))
 
 	plt.yscale('log')
-	ticks= (1000000, 300000, 100000, 30000, 10000, 3000, 1000)
+	ticks= (1000000, 500000, 250000, 100000, 50000, 25000, 10000)
 	plt.yticks(ticks)
-	ax.set_yticklabels(["1M", "300k", "100k", "30k", "10k", '3k', '1k'])
+	ax.set_yticklabels(["1M", "500k", "250k", "100k", "50k", '25k', '10k'])
 	plt.locator_params(axis="x", nbins=count)
 
 	try:
@@ -96,10 +98,27 @@ def animate(i):
 		pass
 
 	text = f"GW# {x[-1]}\nOR: {y[-1]:,}\nGW rank: {team_data['gwrank'][count-1]:,}\nTeam Value: {team_data['tv'][count-1]}"
-	props = dict(boxstyle='round', facecolor='Green', alpha=0.4)
-	textbox = ax.text(0.05, 0.95, text, transform=ax.transAxes,
+	props = dict(boxstyle='round', facecolor='#00CC00', alpha=0.3)
+	textbox = ax.text(0.025, 0.95, text, transform=ax.transAxes,
 	 fontsize=12, verticalalignment='top', bbox=props)
 	textboxes.append(textbox)
+
+	gw_list.append(team_data['gwrank'][count-1])
+	b = min(y)
+	b2 = min(gw_list)
+	location_b = y.index(b)
+	location_b2 = gw_list.index(b2)
+
+	try:
+		textboxes2[-1].remove()
+	except IndexError:
+		pass
+
+	text2 = f"Best OR: {b:,} in GW# {x[location_b]}\nBest GW Rank: {b2:,} in GW# {x[location_b2]+1}"
+	props2 = dict(boxstyle='round', facecolor='#00CC00', alpha=0.3)
+	textbox2 = ax.text(0.2, 0.95, text2, transform=ax.transAxes,
+	 fontsize=12, verticalalignment='top', bbox=props2)
+	textboxes2.append(textbox2)
 
 	count += 1	
 
@@ -107,14 +126,23 @@ def line_slope(y1, y2):
     s = ((y1 - y2)/y1)
     return s
 
-print(f'{123456789:,}')
 ax.set_title(f"{team_name} 2021/2022 Season Rank Progression",
  fontsize= 24, color = ('Purple'))
 ax.tick_params(axis='both', labelsize= 12)
-ax.set_xlabel("Gameweek", fontsize= 18)
-ax.set_ylabel("Overall Rank", fontsize = 18)
+ax.set_xlabel("Gameweek", fontsize= 18, color= 'Purple')
+ax.set_ylabel("Overall Rank", fontsize = 18, color= 'Purple')
 
-ani = animation.FuncAnimation(plt.gcf(), animate, interval=1000)
+ani = animation.FuncAnimation(plt.gcf(), animate,frames=len(team_data['gwrank'])-1, interval=100, repeat = False)
 plt.gca().invert_yaxis()
 ax.tick_params(labeltop=False, labelright=True)
 plt.show()
+f5 = r"c://Users/q8_a7/Desktop/animation.mp4" 
+writervideo = animation.FFMpegWriter(fps=60) 
+fig.canvas.draw()
+ani.event_source.stop()
+
+
+ani.save(f5)
+
+
+
