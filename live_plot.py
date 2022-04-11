@@ -1,6 +1,7 @@
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import json
+plt.rcParams['animation.ffmpeg_path'] = r'C:\\Users\\q8_a7\\Desktop\\ffmpeg\\bin\\ffmpeg.exe'
 
 file_name = 'fplrecord.txt'
 data = []
@@ -132,17 +133,14 @@ ax.tick_params(axis='both', labelsize= 12)
 ax.set_xlabel("Gameweek", fontsize= 18, color= 'Purple')
 ax.set_ylabel("Overall Rank", fontsize = 18, color= 'Purple')
 
-ani = animation.FuncAnimation(plt.gcf(), animate,frames=len(team_data['gwrank'])-1, interval=100, repeat = False)
+ani = animation.FuncAnimation(plt.gcf(), animate,frames=len(team_data['gwrank'])-1, interval=1000, repeat = False)
 plt.gca().invert_yaxis()
 ax.tick_params(labeltop=False, labelright=True)
+
+f5 = r"c://Users/q8_a7/Desktop/animation5.mp4" 
+writervideo = animation.FFMpegWriter(fps=60)  
 plt.show()
-f5 = r"c://Users/q8_a7/Desktop/animation.mp4" 
-writervideo = animation.FFMpegWriter(fps=60) 
+
 fig.canvas.draw()
 ani.event_source.stop()
-
-
-ani.save(f5)
-
-
-
+ani.save(f5, writer=writervideo)
