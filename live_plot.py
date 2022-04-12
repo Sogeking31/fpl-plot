@@ -88,9 +88,9 @@ def animate(i):
 				plt.text(x[-1], y[-1], 'TC', color = ('Purple'))
 
 	plt.yscale('log')
-	ticks= (1000000, 500000, 250000, 100000, 50000, 25000, 10000)
+	ticks= (1000000, 500000, 250000, 100000, 50000)
 	plt.yticks(ticks)
-	ax.set_yticklabels(["1M", "500k", "250k", "100k", "50k", '25k', '10k'])
+	ax.set_yticklabels(["1M", "500k", "250k", "100k", "50k"])
 	plt.locator_params(axis="x", nbins=count)
 
 	try:
@@ -100,7 +100,7 @@ def animate(i):
 
 	text = f"GW# {x[-1]}\nOR: {y[-1]:,}\nGW rank: {team_data['gwrank'][count-1]:,}\nTeam Value: {team_data['tv'][count-1]}"
 	props = dict(boxstyle='round', facecolor='#00CC00', alpha=0.3)
-	textbox = ax.text(0.025, 0.95, text, transform=ax.transAxes,
+	textbox = ax.text(0.225, 0.95, text, transform=ax.transAxes,
 	 fontsize=12, verticalalignment='top', bbox=props)
 	textboxes.append(textbox)
 
@@ -117,7 +117,7 @@ def animate(i):
 
 	text2 = f"Best OR: {b:,} in GW# {x[location_b]}\nBest GW Rank: {b2:,} in GW# {x[location_b2]+1}"
 	props2 = dict(boxstyle='round', facecolor='#00CC00', alpha=0.3)
-	textbox2 = ax.text(0.2, 0.95, text2, transform=ax.transAxes,
+	textbox2 = ax.text(0.4, 0.95, text2, transform=ax.transAxes,
 	 fontsize=12, verticalalignment='top', bbox=props2)
 	textboxes2.append(textbox2)
 
@@ -128,19 +128,16 @@ def line_slope(y1, y2):
     return s
 
 ax.set_title(f"{team_name} 2021/2022 Season Rank Progression",
- fontsize= 24, color = ('Purple'))
+ fontsize= 24)
 ax.tick_params(axis='both', labelsize= 12)
 ax.set_xlabel("Gameweek", fontsize= 18, color= 'Purple')
 ax.set_ylabel("Overall Rank", fontsize = 18, color= 'Purple')
-
-ani = animation.FuncAnimation(plt.gcf(), animate,frames=len(team_data['gwrank'])-1, interval=1000, repeat = False)
+ani = animation.FuncAnimation(plt.gcf(), animate,frames=len(team_data['gwrank'])-1, interval=200, repeat = False)
 plt.gca().invert_yaxis()
 ax.tick_params(labeltop=False, labelright=True)
 
-f5 = r"c://Users/q8_a7/Desktop/animation5.mp4" 
-writervideo = animation.FFMpegWriter(fps=60)  
-plt.show()
+"""f5 = r"c://Users/q8_a7/Desktop/2548.gif" 
+writergif = animation.FFMpegWriter(fps=1)  
+ani.save(f5, writer=writergif)"""
 
-fig.canvas.draw()
-ani.event_source.stop()
-ani.save(f5, writer=writervideo)
+plt.show()
