@@ -136,8 +136,8 @@ ani = animation.FuncAnimation(plt.gcf(), animate,frames=len(team_data['gwrank'])
 plt.gca().invert_yaxis()
 ax.tick_params(labeltop=False, labelright=True)
 
-f5 = r"c://Users/q8_a7/Desktop/2548.gif" 
+"""f5 = r"c://Users/q8_a7/Desktop/2548.gif" 
 writergif = animation.FFMpegWriter(fps=1)  
-ani.save(f5, writer=writergif)
+ani.save(f5, writer=writergif)"""
 
 plt.show()
