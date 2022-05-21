@@ -1,5 +1,6 @@
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
+import matplotlib
 import json
 plt.rcParams['animation.ffmpeg_path'] = r'C:\\Users\\q8_a7\\Desktop\\ffmpeg\\bin\\ffmpeg.exe'
 
@@ -48,6 +49,7 @@ plt.subplots_adjust(left=0.075, right=0.95, top=0.925, bottom=0.1)
 
 textboxes=[]
 textboxes2=[]
+textboxes3=[]
 x=[1]
 y=[team_data['oarank'][0]]
 gw_list=[]
@@ -79,19 +81,22 @@ def animate(i):
 	for key in chips:
 		if f'GW{x[-1]}' == key:
 			if chips[key] == 'Wildcard':
-				plt.text(x[-1], y[-1], 'WC', color = ('Purple'))
+				plt.text(x[-1], y[-1], 'WC', color = ('Purple'), fontsize=8)
 			elif chips[key] == 'FreeHit':
-				plt.text(x[-1], y[-1], 'FH', color = ('Purple'))
+				plt.text(x[-1], y[-1], 'FH', color = ('Purple'), fontsize=8)
 			elif chips[key] == 'BenchBoost':
-				plt.text(x[-1], y[-1], 'BB', color = ('Purple'))
+				plt.text(x[-1], y[-1], 'BB', color = ('Purple'), fontsize=8)
 			elif chips[key] == 'TripleCaptain':
-				plt.text(x[-1], y[-1], 'TC', color = ('Purple'))
+				plt.text(x[-1], y[-1], 'TC', color = ('Purple'), fontsize=8)
 
 	plt.yscale('log')
 	ticks= (1000000, 500000, 250000, 100000, 50000, 25000, 10000)
 	plt.yticks(ticks)
 	ax.set_yticklabels(["1M", "500k", "250k", "100k", "50k", "25k", "10k"])
+	plt.xticks(fontsize=10)
+	plt.yticks(fontsize=10)
 	plt.locator_params(axis="x", nbins=count)
+
 
 	try:
 		textboxes[-1].remove()
@@ -110,16 +115,32 @@ def animate(i):
 	location_b = y.index(b)
 	location_b2 = gw_list.index(b2)
 
+	w = max(y)
+	w2 = max(gw_list)
+	location_w = y.index(w)
+	location_w2 = gw_list.index(w2)
+
 	try:
 		textboxes2[-1].remove()
 	except IndexError:
 		pass
 
+	try:
+		textboxes3[-1].remove()
+	except IndexError:
+		pass
+
 	text2 = f"Best OR: {b:,} in GW# {x[location_b]}\nBest GW Rank: {b2:,} in GW# {x[location_b2]+1}"
 	props2 = dict(boxstyle='round', facecolor='#00CC00', alpha=0.3)
-	textbox2 = ax.text(0.2, 0.95, text2, transform=ax.transAxes,
-	 fontsize=12, verticalalignment='top', bbox=props2)
+	textbox2 = ax.text(0.185, 0.95, text2, transform=ax.transAxes,
+	 fontsize=11, verticalalignment='top', bbox=props2)
 	textboxes2.append(textbox2)
+
+	text3 = f"Worst OR: {w:,} in GW# {x[location_w]}\nWorst GW Rank: {w2:,} in GW# {x[location_w2]+1}"
+	props3 = dict(boxstyle='round', facecolor='#CC0000', alpha=0.3)
+	textbox3 = ax.text(0.185, 0.86, text3, transform=ax.transAxes,
+	 fontsize=11, verticalalignment='top', bbox=props3)
+	textboxes3.append(textbox3)
 
 	count += 1	
 
@@ -127,8 +148,7 @@ def line_slope(y1, y2):
     s = ((y1 - y2)/y1)
     return s
 
-ax.set_title(f"{team_name} 2021/2022 Season Rank Progression",
- fontsize= 24)
+ax.set_title(f'"{team_name}" FPL 2021/22 Season ',fontsize= 20)
 ax.tick_params(axis='both', labelsize= 12)
 ax.set_xlabel("Gameweek", fontsize= 18, color= 'Purple')
 ax.set_ylabel("Overall Rank", fontsize = 18, color= 'Purple')
@@ -136,8 +156,8 @@ ani = animation.FuncAnimation(plt.gcf(), animate,frames=len(team_data['gwrank'])
 plt.gca().invert_yaxis()
 ax.tick_params(labeltop=False, labelright=True)
 
-"""f5 = r"c://Users/q8_a7/Desktop/2548.gif" 
-writergif = animation.FFMpegWriter(fps=1)  
-ani.save(f5, writer=writergif)"""
+f5 = r"c://Users/q8_a7/Desktop/2548.mp4" 
+writervideo = animation.FFMpegWriter(fps=2)  
+ani.save(f5, writer=writervideo)
 
 plt.show()

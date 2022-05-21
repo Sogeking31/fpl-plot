@@ -1,1 +1,1 @@
-{"GW19": "Wildcard", "GW26": "TripleCaptain", "GW27": "FreeHit", "GW28": "Wildcard", "GW29": "BenchBoost", "": ""}
+{"GW8": "Wildcard", "GW26": "Wildcard", "GW27": "FreeHit", "GW28": "BenchBoost", "GW29": "TripleCaptain", "GW37": "FreeHit"}
