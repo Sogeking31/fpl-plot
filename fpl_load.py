@@ -9,7 +9,7 @@ import json
 path = "C:/Users/q8_a7/Desktop/my projects/fpl-plot/driver_file/geckodriver.exe"
 driver = webdriver.Firefox(executable_path= r'C:/Users/q8_a7/Desktop/my projects/fpl-plot/driver_file/geckodriver.exe')
 
-team_id = '1014'
+team_id = '4455'
 headers={'user-agent': 'Mozilla/5.0'}
 driver.get(f"https://fantasy.premierleague.com/entry/{team_id}/history")
 soup = bs4.BeautifulSoup(driver.page_source, "html.parser")
@@ -17,11 +17,11 @@ i = 1
 oarank, gwrank, gwpoints, oapoints, tv= [], [], [], [], []
 for x in range(38):
 	try:
-		elems_gwp = soup.select(f'table.Table-ziussd-1:nth-child(1) > tbody:nth-child(2) > tr:nth-child({i}) > td:nth-child(2)')
-		elems_oap = soup.select(f'table.Table-ziussd-1:nth-child(1) > tbody:nth-child(2) > tr:nth-child({i}) > td:nth-child(7)')
-		elems_tv = soup.select(f'table.Table-ziussd-1:nth-child(1) > tbody:nth-child(2) > tr:nth-child({i}) > td:nth-child(9)')
-		elems_oar = soup.select(f'table.Table-ziussd-1:nth-child(1) > tbody:nth-child(2) > tr:nth-child({i}) > td:nth-child(8)')
-		elems_gwr = soup.select(f'table.Table-ziussd-1:nth-child(1) > tbody:nth-child(2) > tr:nth-child({i}) > td:nth-child(4)')
+		elems_gwp = soup.select(f'table.Table-ziussd-1:nth-child(1) > tbody:nth-child(2) > tr:nth-child({i}) > td:nth-child(6)')
+		elems_oap = soup.select(f'table.Table-ziussd-1:nth-child(1) > tbody:nth-child(2) > tr:nth-child({i}) > td:nth-child(4)')
+		elems_tv = soup.select(f'table.Table-ziussd-1:nth-child(1) > tbody:nth-child(2) > tr:nth-child({i}) > td:nth-child(10)')
+		elems_oar = soup.select(f'table.Table-ziussd-1:nth-child(1) > tbody:nth-child(2) > tr:nth-child({i}) > td:nth-child(2)')
+		elems_gwr = soup.select(f'table.Table-ziussd-1:nth-child(1) > tbody:nth-child(2) > tr:nth-child({i}) > td:nth-child(5)')
 		oarank.append(elems_oar[0].text)
 		gwrank.append(elems_gwr[0].text)
 		gwpoints.append(elems_gwp[0].text)
@@ -31,7 +31,9 @@ for x in range(38):
 		i += 1
 	except IndexError:
 		break
-
+lists = [oarank, gwrank, gwpoints, oapoints, tv]
+for l in lists:
+	l.reverse()
 def remove_tags(html):
 	soup = BeautifulSoup(html, "html.parser")
 	for data in soup(['style', 'script']):
@@ -68,6 +70,7 @@ html_nm = f"""{elems_nm}"""
 team_name = remove_tags(html_nm)
 with open('team_name.txt', 'w') as f:
 	f.write(team_name)
+
 
 lines =[oarank, gwrank, gwpoints, oapoints, tv]
 with open('fplrecord.txt', 'w') as f:

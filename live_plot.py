@@ -155,9 +155,9 @@ ax.set_ylabel("Overall Rank", fontsize = 18, color= 'Purple')
 ani = animation.FuncAnimation(plt.gcf(), animate,frames=len(team_data['gwrank'])-1, interval=200, repeat = False)
 plt.gca().invert_yaxis()
 ax.tick_params(labeltop=False, labelright=True)
-
+"""
 f5 = r"c://Users/q8_a7/Desktop/2548.mp4" 
 writervideo = animation.FFMpegWriter(fps=2)  
 ani.save(f5, writer=writervideo)
-
+"""
 plt.show()
